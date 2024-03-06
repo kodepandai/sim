@@ -5,9 +5,10 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, router, useForm } from '@inertiajs/react';
+import SecondaryButton from '@/Components/SecondaryButton';
 
-export default function Login({ status, canResetPassword }: { status?: string, canResetPassword: boolean }) {
+export default function Login({ status, canResetPassword, as }: { status?: string, canResetPassword: boolean, as: 'admin'|'pharmacy'|'doctor' }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -23,11 +24,15 @@ export default function Login({ status, canResetPassword }: { status?: string, c
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        post(route('login'));
+        post(route(`${as}:login.store`));
     };
 
+    const back = ()=>{
+        window.history.back()
+    }
+
     return (
-        <GuestLayout>
+        <GuestLayout as={as}>
             <Head title="Log in" />
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
@@ -37,6 +42,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
+                        required
                         id="email"
                         type="email"
                         name="email"
@@ -54,6 +60,7 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                     <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
+                        required
                         id="password"
                         type="password"
                         name="password"
@@ -78,6 +85,9 @@ export default function Login({ status, canResetPassword }: { status?: string, c
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
+                    <SecondaryButton className="ms-4" disabled={processing} onClick={back}>
+                        Back
+                    </SecondaryButton>
                     {canResetPassword && (
                         <Link
                             href={route('password.request')}

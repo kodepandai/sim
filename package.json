@@ -7,6 +7,9 @@
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
+        "@iconify-json/healthicons": "^1.1.17",
+        "@iconify-json/wpf": "^1.1.8",
+        "@iconify/tailwind": "^0.1.4",
         "@inertiajs/react": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
         "@types/node": "^18.13.0",
