@@ -28,7 +28,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "KodePandai\\SatuSehat\\": "services/satu-sehat/src/"
         }
     },
     "autoload-dev": {
@@ -37,6 +38,7 @@
         }
     },
     "scripts": {
+        "lint": "@php vendor/bin/pint",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
