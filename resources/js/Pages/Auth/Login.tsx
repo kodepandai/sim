@@ -92,7 +92,7 @@ export default function Login({ status, canResetPassword, as }: { status?: strin
                         </Button>
                     )}
 
-                    <Button className="ms-4" disabled={processing}>
+                    <Button className="ms-4" disabled={processing} type="submit">
                         Log in
                     </Button>
                 </div>

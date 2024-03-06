@@ -2,7 +2,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 import { PropsWithChildren } from 'react';
 
-export default function Guest({ children, as }: PropsWithChildren<{as: 'admin'|'pharmacy'|'doctor'}>) {
+export default function Guest({ children, as="admin" }: PropsWithChildren<{as?: 'admin'|'pharmacy'|'doctor'}>) {
     const icons = {
         admin: 'icon-[wpf--administrator]',
         doctor: 'icon-[healthicons--doctor]',
