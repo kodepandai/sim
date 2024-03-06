@@ -1,11 +1,8 @@
 import { useEffect, FormEventHandler } from 'react';
-import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import {TextInput, Checkbox, Button} from '@mantine/core';
+import { Head, Link, useForm } from '@inertiajs/react';
 import SecondaryButton from '@/Components/SecondaryButton';
 
 export default function Login({ status, canResetPassword, as }: { status?: string, canResetPassword: boolean, as: 'admin'|'pharmacy'|'doctor' }) {
@@ -39,9 +36,8 @@ export default function Login({ status, canResetPassword, as }: { status?: strin
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
+                        label="Email"
                         required
                         id="email"
                         type="email"
@@ -49,17 +45,16 @@ export default function Login({ status, canResetPassword, as }: { status?: strin
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        isFocused={true}
+                        autoFocus={true}
                         onChange={(e) => setData('email', e.target.value)}
+                        error={errors.email}
                     />
-
-                    <InputError message={errors.email} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
 
                     <TextInput
+                        label="Password"
                         required
                         id="password"
                         type="password"
@@ -68,38 +63,38 @@ export default function Login({ status, canResetPassword, as }: { status?: strin
                         className="mt-1 block w-full"
                         autoComplete="current-password"
                         onChange={(e) => setData('password', e.target.value)}
+                        error={errors.password}
                     />
-
-                    <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox
+                            label="Remember me"
                             name="remember"
                             checked={data.remember}
                             onChange={(e) => setData('remember', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600">Remember me</span>
                     </label>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <SecondaryButton className="ms-4" disabled={processing} onClick={back}>
+                    <Button color="gray" className="ms-4" disabled={processing} onClick={back}>
                         Back
-                    </SecondaryButton>
+                    </Button>
                     {canResetPassword && (
-                        <Link
+                        <Button
+                            component={Link}
                             href={route('password.request')}
                             className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Forgot your password?
-                        </Link>
+                        </Button>
                     )}
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <Button className="ms-4" disabled={processing}>
                         Log in
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>
